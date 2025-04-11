@@ -1,0 +1,12 @@
+---
+# handlers file for wireguard
+- name: Reboot machine
+  ansible.builtin.reboot:
+    reboot_timeout: 3600
+
+- name: Restart wireguard
+  ansible.builtin.systemd:
+    state: restarted
+    daemon_reload: true
+    enabled: true
+    name: "wg-quick@{{ interface_name }}"

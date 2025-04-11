@@ -1,0 +1,11 @@
+galaxy_info:
+  standalone: true
+  author: Michael Leer <michael@leer.dev>
+  description: Automation wireguard mesh private networking
+  company: Gremlin LTD
+  license: "MIT"
+  min_ansible_version: "2.15"
+  galaxy_tags:
+    - networking
+    - wireguard
+dependencies: []

@@ -1,0 +1,35 @@
+---
+- name: Creates wireguard quick dir
+  ansible.builtin.file:
+    path: /etc/wireguard
+    state: directory
+    mode: "0700"
+  tags:
+    - config
+
+- name: Generate keys and set facts
+  ansible.builtin.script: make_keys.sh
+
+- name: Re-gather facts
+  ansible.builtin.setup:
+
+- name: Render template
+  ansible.builtin.template:
+    src: interface.conf
+    dest: "/etc/wireguard/{{ interface_name }}.conf"
+    mode: "0600"
+    force: true
+  notify: restart wireguard
+
+- name: Register as node
+  ansible.builtin.set_fact:
+    wg_ip: "{{ ansible_host }}"
+    wg_port: "{{ listen_port }}"
+    wg_public_key: "{{ ansible_local.wireguard.public_key }}"
+    wg_inte_ip: "{{ inte_ip }}"
+
+- name: Add peers to config
+  ansible.builtin.blockinfile:
+    path: "/etc/wireguard/{{ interface_name }}.conf"
+    block: "{{ lookup('template', 'templates/peers.conf') }}"
+  notify: restart wireguard

@@ -1,0 +1,9 @@
+---
+- name: Install wireguard and tools # noqa package-latest
+  ansible.builtin.apt:
+    name:
+      - wireguard
+      - wireguard-dkms
+      - wireguard-tools
+    state: latest
+    update_cache: true
