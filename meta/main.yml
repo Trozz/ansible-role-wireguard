@@ -1,5 +1,4 @@
 galaxy_info:
-  standalone: true
   author: Michael Leer <michael@leer.dev>
   description: Automation wireguard mesh private networking
   company: Gremlin LTD
