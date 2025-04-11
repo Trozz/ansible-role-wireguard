@@ -19,7 +19,7 @@
     dest: "/etc/wireguard/{{ interface_name }}.conf"
     mode: "0600"
     force: true
-  notify: restart wireguard
+  notify: Restart wireguard
 
 - name: Register as node
   ansible.builtin.set_fact:
@@ -32,4 +32,4 @@
   ansible.builtin.blockinfile:
     path: "/etc/wireguard/{{ interface_name }}.conf"
     block: "{{ lookup('template', 'templates/peers.conf') }}"
-  notify: restart wireguard
+  notify: Restart wireguard
