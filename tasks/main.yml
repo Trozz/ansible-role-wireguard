@@ -1,7 +1,7 @@
 ---
 - name: Include dependencies
   ansible.builtin.include_tasks:
-    name: "dependencies/{{ ansible_distribution | lower }}.yml"
+    file: "dependencies/{{ ansible_distribution | lower }}.yml"
   tags:
     - install
     - deps
@@ -24,6 +24,6 @@
 
 - name: Include configuration tasks
   ansible.builtin.include_tasks:
-    name: config.yml
+    file: config.yml
   tags:
     - config
